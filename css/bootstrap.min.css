@@ -6562,7 +6562,7 @@ fieldset:disabled .btn {
     width: 100%;
     margin-right: -100%;
     backface-visibility: hidden;
-    transition: transform .6s ease-in-out
+    transition: transform .3s ease-in-out
 }
 
 @media (prefers-reduced-motion: reduce) {
