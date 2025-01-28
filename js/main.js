@@ -173,3 +173,70 @@
     
 })(jQuery);
 
+function toggleQuantity(checkbox, quantityId) {
+    const quantityField = document.getElementById(quantityId);
+    quantityField.disabled = !checkbox.checked;
+    if (!checkbox.checked) {
+        quantityField.value = ""; // Limpa o campo se desmarcar
+    }
+}
+
+function sendToWhatsApp() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    // Produtos selecionados
+    const products = getSelectedProducts();
+
+    // Mensagem formatada
+    const fullMessage = `Nome: ${name}
+E-mail: ${email}
+Assunto: ${subject}
+Mensagem: ${message}
+Produtos selecionados: ${products}`;
+
+    // URL para o WhatsApp
+    const whatsappNumber = "558391948883";
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(fullMessage)}`;
+
+    window.open(whatsappLink, "_blank");
+}
+
+function sendToEmail() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    // Produtos selecionados
+    const products = getSelectedProducts();
+
+    // URL para o e-mail
+    const emailRecipient = "contato@fattopremoldados.com.br";
+    const emailSubject = encodeURIComponent(subject);
+    const emailBody = encodeURIComponent(`Nome: ${name}
+E-mail: ${email}
+Mensagem: ${message}
+Produtos selecionados: ${products}`);
+
+    const mailtoLink = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
+
+    window.open(mailtoLink, "_blank");
+}
+
+function getSelectedProducts() {
+    const products = [];
+    const checkboxes = document.querySelectorAll(".form-check-input");
+    
+    checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+            const quantityId = `quantity-${checkbox.id}`;
+            const quantity = document.getElementById(quantityId).value || 0;
+            products.push(`${checkbox.nextElementSibling.textContent.trim()} (Quantidade: ${quantity})`);
+        }
+    });
+
+    return products.length ? products.join(", ") : "Nenhum produto selecionado";
+}

@@ -592,3 +592,31 @@
 .footer .copyright a {
     color: var(--light);
 }
+
+/* Gambiarra de media-query para celulares da xuxa */
+
+@media (max-width: 528px) {
+    #logo-png img{
+        width:10rem !important;
+    }
+
+    #cta-logo{
+        align-items: center;
+        padding: 0.8rem !important;
+        font-size: 0.8rem !important;
+        margin-right: 0.5rem !important;
+    }
+
+}
+
+@media (max-width: 375px) {
+
+    #logo-png img{
+        width:8rem !important;
+    }
+
+    #cta-logo{
+        align-items: center;
+        padding: 0.6rem !important;
+    }
+}
